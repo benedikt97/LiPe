@@ -5,7 +5,7 @@ import time
 print("opc.py being executed")
 
 
-appsub = subprocess.Popen(['python3', 'AppServer.py'])
+appsub = subprocess.Popen(['python3', 'app/AppServer.py'])
 
 time.sleep(60)
 
