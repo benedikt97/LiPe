@@ -65,6 +65,21 @@ def cmdopc():
         return result
 
 
+@app.route('api', methods=['GET'])
+def api():
+    c = request.args.get('c')
+    try:
+        if (r == "initOpc"):
+            opccon.initopc(lp.loadopcconfig(), lp.loadnodes())
+            return "done"
+        elif (r == "startOpc"):
+            opccon.collect(True)
+            return "done"
+        return r + " Parameter not Vaild"
+    except Exception as e:
+        result = str(e)
+        return result
+
 
 
 @app.route('/test')
