@@ -75,15 +75,22 @@ class dbcon:
 
     def deleteLog(self):
         cur = self.db.cursor()
-        db = self.db
         sql = "DELETE FROM serverlog"
         cur.execute(sql)
         self.db.commit()
         return "Done"
 
+    def deleteTable(self, name):
+        cur = self.db.cursor()
+        sql = "DELETE FROM " + name
+        cur.execute(sql)
+        self.db.commit()
+        return "Done"
+
+
 
     def getTables(self):
-        cur = self.db.Cursor(dictionary=True)
+        cur = self.db.cursor(dictionary=True)
         sql = "SHOW TABLES"
         cur.execute(sql)
         rows = cur.fetchall()
@@ -98,6 +105,17 @@ class dbcon:
     def getTable(self, tablename):
         cur = self.dbcurdict
         sql = "SELECT * FROM " + tablename
+        cur.execute(sql)
+        rows = cur.fetchall()
+        nesteddict = {}
+        for row in rows:
+            nesteddict[row["id"]] = row
+        self.db.commit()
+        return nesteddict
+
+    def getLastXTableRows(self, tablename, x):
+        cur = self.db.cursor(dictionary=True)
+        sql = "SELECT * FROM " + tablename + " ORDER BY id DESC LIMIT " + str(x)
         cur.execute(sql)
         rows = cur.fetchall()
         nesteddict = {}

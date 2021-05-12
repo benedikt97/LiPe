@@ -75,7 +75,7 @@ class opccon:
         self.isLogging = isLogging
         self.opcthread = opccoll(self.configjs, self.nodesjs, self.client, self.dbconn, self.isLogging)
         self.opcthread.start()
-        self.dbconn.writecom("opc", "Starting", "Thread Started", str(e))
+        self.dbconn.writecom("opc", "Starting", "Thread Started", "")
         return
 
 #    def collect(self, isLogging): 

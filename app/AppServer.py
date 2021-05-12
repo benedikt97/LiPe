@@ -15,67 +15,44 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/get', methods=['GET'])
-def get():
-    r = request.args.get('e')
-    try:
-        if (r == "tables"):
-            result = dbcon.getTables()
-            return result
-        elif (r == "logs"):
-            result = dbcon.getLog()
-            return result
-        elif (r == "opcconfig"):
-            result = lp.loadopcconfig()
-            return result
-        elif (r == "actvalues"):
-            result = opccon.getActValues()
-            return result
-        return r + " Parameter not Vaild"
-    except:
-        result = "Error: No Parameters"
-        return result
 
-
-@app.route('/cmd/db', methods=['GET'])
-def cmddb():
-    r = request.args.get('e')
-    try:
-        if (r == "deletelog"):
-            dbcon.deleteLog()
-            return "done"
-        return r + " Parameter not Vaild"
-    except Exception as e:
-        result = str(e)
-        return result
-
-@app.route('/cmd/opc', methods=['GET'])
-def cmdopc():
-    r = request.args.get('e')
-    try:
-        if (r == "initOpc"):
-            opccon.initopc(lp.loadopcconfig(), lp.loadnodes())
-            return "done"
-        elif (r == "startOpc"):
-            opccon.collect(True)
-            return "done"
-        return r + " Parameter not Vaild"
-    except Exception as e:
-        result = str(e)
-        return result
-
-
-@app.route('api', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def api():
     c = request.args.get('c')
+    p1 = request.args.get('p1')
+    p2 = request.args.get('p2')
     try:
-        if (r == "initOpc"):
-            opccon.initopc(lp.loadopcconfig(), lp.loadnodes())
+# OPC Commands
+        if (c == "initopc"):
+            opccon.initopc(lp.loadopcconfig(), lp.loadnodes(), False)
             return "done"
-        elif (r == "startOpc"):
-            opccon.collect(True)
+        elif (c == "initopclogging"):
+            opccon.initopc(lp.loadopcconfig(), lp.loadnodes(), True)
             return "done"
-        return r + " Parameter not Vaild"
+# Server Command
+        elif (c == "deleteserverlog"):
+            dbcon.deleteLog()
+            return "done"
+#DB Commands            
+        elif (c == "gettables"):
+            result = dbcon.getTables()
+            return result
+        elif (c == "getlogs"):
+            result = dbcon.getLog()
+            return result
+        elif (c == "getopcconfig"):
+            result = lp.loadopcconfig()
+            return result
+        elif (c == "getactvalues"):
+            result = opccon.getActValues()
+            return result
+        elif (c == "gettablelastx"):
+            result = dbcon.getLastXTableRows(p1, p2)
+            return result
+
+        
+
+        return c + " Parameter not Vaild"
     except Exception as e:
         result = str(e)
         return result

@@ -1,3 +1,10 @@
 1. Analyse übertragung Fehlermeldung SPS <-> HMI
 2. Analyse welche Form VUE braucht für Diagramme
-3. Vue Projekt anlegen
+3. Entwicklung eines Test Dashboards -> Vorlage benutzt
+4. Bool Variablen testen
+
+
+
+Bachelor
+1. Vue Projekt anlegen / Auf git pushen
+2. Grundlage Vue erlernen
