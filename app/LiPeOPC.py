@@ -17,11 +17,12 @@ class opccoll(Thread):
         self.configjs = opcconfigjs
         self.nodesjs = nodesjs
         self.client = opcclient
-        self.dbconn = dbconn      
+        self.dbconn = dbconn    
+        #Prepare Database Table and get SQL Pre  
         try:
             if isLogging:
                 self. sqlpre = self.dbconn.prepareAndSelectLoggingTable(self.configjs["DBTablename"], self.nodesjs)        
-            self.dbconn.writecom("opc", "Connected", "Connectected succesfully to Database", "")
+            self.dbconn.writecom("opc", "Message", "Table in Database created", "")
         except Exception as e:
             self.dbconn.writecom("opc", "Error", "No Connection to Database possible", str(e))
         return   
@@ -48,16 +49,19 @@ class opccon:
     
     def __init__(self, opcconfigjs, nodesjs):
         self.actValues = {}
+        #Connect to Database
         self.dbconn = lpd.dbcon("LiPe", "127.0.0.1", "opc", "LiPePWD320")
         return         
 
-    def initopc(self, opcconfigjs, nodesjs):
+    def initopc(self, opcconfigjs, nodesjs, islogging):
+        #Check if Thread is already running
         try:
             if self.opcthread.isAlive():
                 self.dbconn.writecom("opc", "Error", "Thread is running, please stop Thread for new Configuration", "")
                 return
         except:
             dummy = False
+        #Get Parameters an connect to OPC Server
         try:
             self.configjs = opcconfigjs
             self.nodesjs = nodesjs
@@ -66,18 +70,25 @@ class opccon:
             self.dbconn.writecom("opc", "Connected", "Connectected succesfully to " + self.configjs["IP"], "")
         except Exception as e:
             self.dbconn.writecom("opc", "Error", "No Connection to OPC Server", str(e))
-
-    def collect(self, isLogging): 
-        try:
-            if self.opcthread.isAlive():
-                self.dbconn.writecom("opc", "Error", "Thread already running", "")
-                return
-        except Exception as e:
-            self.isLogging = isLogging
-            self.opcthread = opccoll(self.configjs, self.nodesjs, self.client, self.dbconn, self.isLogging)
-            self.opcthread.start()
-            self.dbconn.writecom("opc", "Starting", "Thread Started", str(e))
             return
+        #Start OPC Collecting Thread
+        self.isLogging = isLogging
+        self.opcthread = opccoll(self.configjs, self.nodesjs, self.client, self.dbconn, self.isLogging)
+        self.opcthread.start()
+        self.dbconn.writecom("opc", "Starting", "Thread Started", str(e))
+        return
+
+#    def collect(self, isLogging): 
+#        try:
+#            if self.opcthread.isAlive():
+#                self.dbconn.writecom("opc", "Error", "Thread already running", "")
+#                return
+#        except Exception as e:
+#            self.isLogging = isLogging
+#            self.opcthread = opccoll(self.configjs, self.nodesjs, self.client, self.dbconn, self.isLogging)
+#            self.opcthread.start()
+#            self.dbconn.writecom("opc", "Starting", "Thread Started", str(e))
+#            return
         
     def stopcollect(self):
         try:
