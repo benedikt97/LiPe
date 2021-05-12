@@ -53,7 +53,7 @@ class opccon:
         self.dbconn = lpd.dbcon("LiPe", "127.0.0.1", "opc", "LiPePWD320")
         return         
 
-    def initopc(self, opcconfigjs, nodesjs, islogging):
+    def initopc(self, opcconfigjs, nodesjs, isLogging):
         #Check if Thread is already running
         try:
             if self.opcthread.isAlive():
