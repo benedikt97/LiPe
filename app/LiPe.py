@@ -4,19 +4,19 @@ import mariadb
 
 
 def loadopcconfig():
-    f = open("./config/opcconfig.json")
+    f = open("./app/config/opcconfig.json")
     configjs = json.load(f)
     f.close()
     return (configjs)
 
 def loadnodes():
-    f = open("./config/nodes.json")
+    f = open("./app/config/nodes.json")
     nodesjs = json.load(f)
     f.close()
     return nodesjs
 
 def loadserverconfig():
-    f = open("./config/serverconfig.json")
+    f = open("./app/config/serverconfig.json")
     configjs = json.load(f)
     f.close()
     return (configjs)
