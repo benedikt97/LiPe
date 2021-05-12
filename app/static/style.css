@@ -76,6 +76,7 @@ body {
 }
 
 
+
 /* HEADER STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-header {
@@ -215,8 +216,10 @@ body {
   width: calc(100% - var(--page-header-width));
   min-height: 100vh;
   padding: 30px;
+  
   color: var(--page-content-txtColor);
   background: var(--page-content-bgColor);
+  
 }
 
 .search-and-user {
@@ -298,6 +301,15 @@ body {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
 }
+
+.page-content .grid .button {
+  color:var(--white);
+  height: 30px;
+  background-color: var(--page-header-bgColor);
+  position: absolute;
+}
+
+
 
 .page-content .grid > article {
   display: flex;
