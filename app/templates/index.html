@@ -102,51 +102,28 @@
         <li>
           <a href="#0">
             <svg>
-              <use xlink:href="#pages"></use>
+              <use xlink:href="#LiveMonitor"></use>
             </svg>
-            <span>Pages</span>
+            <span>LiveMonitor</span>
           </a>
         </li>
         <li>
           <a href="#0">
             <svg>
-              <use xlink:href="#users"></use>
+              <use xlink:href="#Chart"></use>
             </svg>
-            <span>Users</span>
+            <span>Charts</span>
           </a>
         </li>
         <li>
           <a href="#0">
             <svg>
-              <use xlink:href="#trends"></use>
+              <use xlink:href="#Log"></use>
             </svg>
-            <span>Trends</span>
+            <span>Log</span>
           </a>
         </li>
-        <li>
-          <a href="#0">
-            <svg>
-              <use xlink:href="#collection"></use>
-            </svg>
-            <span>Collection</span>
-          </a>
-        </li>
-        <li>
-          <a href="#0">
-            <svg>
-              <use xlink:href="#comments"></use>
-            </svg>
-            <span>Comments</span>
-          </a>
-        </li>
-        <li>
-          <a href="#0">
-            <svg>
-              <use xlink:href="#appearance"></use>
-            </svg>
-            <span>Appearance</span>
-          </a>
-        </li>
+        
         <li class="menu-heading">
           <h3>Settings</h3>
         </li>
@@ -156,22 +133,6 @@
               <use xlink:href="#settings"></use>
             </svg>
             <span>Settings</span>
-          </a>
-        </li>
-        <li>
-          <a href="#0">
-            <svg>
-              <use xlink:href="#options"></use>
-            </svg>
-            <span>Options</span>
-          </a>
-        </li>
-        <li>
-          <a href="#0">
-            <svg>
-              <use xlink:href="#charts"></use>
-            </svg>
-            <span>Charts</span>
           </a>
         </li>
         <li>
@@ -193,25 +154,10 @@
     </nav>
   </header>
   <section class="page-content">
-    <section class="search-and-user">
-      <form>
-        <input type="search" placeholder="Search Pages...">
-        <button type="submit" aria-label="submit form">
-          <svg aria-hidden="true">
-            <use xlink:href="#search"></use>
-          </svg>
-        </button>
-      </form>
-      <div class="admin-profile">
-        <span class="greeting">Hello admin</span>
-        <div class="notifications">
-          <span class="badge">1</span>
-          <svg>
-            <use xlink:href="#users"></use>
-          </svg>
-        </div>
-      </div>
-    </section>
+    
+    
+
+
     <section class="grid">
       <article>
           <h2 id="opcip">Ip Adresse des OPC Servers: </h2><h2>ipadress</h2>
@@ -225,15 +171,12 @@
       <article></article>
       <article></article>
     </section>
-    <footer class="page-footer">
-      <span>made by </span>
-      <a href="https://georgemartsoukos.com/" target="_blank">
-        <img width="24" height="24" src="https://assets.codepen.io/162656/george-martsoukos-small-logo.svg" alt="George Martsoukos logo">
-      </a>
-    </footer>
+    
   </section>
   
 
 
 
-  <script src="script.js"></script>
+  
+  
+  <script src="{{ url_for('static', filename='script.js')}}"></script>

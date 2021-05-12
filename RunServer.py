@@ -9,9 +9,9 @@ appsub = subprocess.Popen(['python3', 'app/AppServer.py'])
 
 time.sleep(60)
 
-print("Killing Server")
-appsub.kill()
-print("Server Killed")
+#print("Killing Server")
+#appsub.kill()
+#print("Server Killed")
 
 
 

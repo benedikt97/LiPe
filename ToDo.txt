@@ -1,0 +1,3 @@
+1. Analyse übertragung Fehlermeldung SPS <-> HMI
+2. Analyse welche Form VUE braucht für Diagramme
+3. Vue Projekt anlegen
