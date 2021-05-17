@@ -93,7 +93,7 @@ class opccon:
     def stopcollect(self):
         try:
             self.opcthread.isRunning = False
-            self.dbconn.writecom("opc", "Starting", "Thread Stopped", "")
+            self.dbconn.writecom("opc", "Stopping", "Thread Stopped", "")
         except:
             self.dbconn.writecom("opc", "Error", "Thread not Stopped, no Thread Running", "")
 
@@ -102,6 +102,16 @@ class opccon:
             return self.opcthread.actValues
         except Exception as e:
             return str(e)
+
+    def getStatus(self):
+        try:
+            if self.opcthread.isAlive():
+                return True
+            else:
+                return False
+        except:
+            return False
+
 
 
 
