@@ -29,6 +29,11 @@ def api():
         elif (c == "initopclogging"):
             opccon.initopc(lp.loadopcconfig(), lp.loadnodes(), True)
             return "done"
+        elif (c == "opcstatus"):
+            if opccon.getStatus():
+                return "Running"
+            else:
+                return "Not Running"
 # Server Command
         elif (c == "deleteserverlog"):
             dbcon.deleteLog()
@@ -52,6 +57,7 @@ def api():
         elif (c == "getnodes"):
             result = lp.loadnodes()
             return result
+        
 
         
 
