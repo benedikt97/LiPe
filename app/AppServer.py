@@ -6,7 +6,7 @@ from flask import render_template
 import LiPeDB as lpd
 import LiPe as lp
 import LiPeOPC as lpo
-import subprocess
+
 
 app = Flask(__name__)
 
@@ -48,6 +48,9 @@ def api():
             return result
         elif (c == "gettablelastx"):
             result = dbcon.getLastXTableRows(p1, p2)
+            return result
+        elif (c == "getnodes"):
+            result = lp.loadnodes()
             return result
 
         

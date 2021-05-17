@@ -126,6 +126,7 @@ class dbcon:
 
     def Test(self):
         result = "<h1>Dies ist ein Test</h1>"
+        time.sleep(5)
         return(result)
 
     
