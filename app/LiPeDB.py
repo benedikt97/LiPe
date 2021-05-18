@@ -69,8 +69,10 @@ class dbcon:
         rows = cur.fetchall()
         self.db.commit()
         nesteddict = {}
+        x = 0
         for row in rows:
-            nesteddict[row["id"]] = row
+            nesteddict[x] = row
+            x = x + 1
         return nesteddict
 
     def deleteLog(self):
