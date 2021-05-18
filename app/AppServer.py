@@ -24,10 +24,10 @@ def api():
     try:
 # OPC Commands
         if (c == "initopc"):
-            opccon.initopc(lp.loadopcconfig(), lp.loadnodes(), False)
+            opccon.initOpc(lp.loadopcconfig(), lp.loadnodes())
             return "done"
-        elif (c == "initopclogging"):
-            opccon.initopc(lp.loadopcconfig(), lp.loadnodes(), True)
+        if (c == "stopopc"):
+            opccon.stopOpc()
             return "done"
         elif (c == "opcstatus"):
             if opccon.getStatus():
@@ -39,7 +39,7 @@ def api():
             dbcon.deleteLog()
             return "done"
 #DB Commands            
-        elif (c == "gettables"):
+        elif (c == "getopclogs"):
             result = dbcon.getTables()
             return result
         elif (c == "getlogs"):
@@ -51,11 +51,15 @@ def api():
         elif (c == "getactvalues"):
             result = opccon.getActValues()
             return result
+        elif (c == "getstaticvalues"):
+            result = opccon.getStaticValues()
+            return result
         elif (c == "gettablelastx"):
             result = dbcon.getLastXTableRows(p1, p2)
             return result
         elif (c == "getnodes"):
             result = lp.loadnodes()
+            result = result["cyclic"]
             return result
         
 
@@ -77,7 +81,7 @@ def test():
 
 if __name__ == '__main__':
     dbcon = lpd.dbcon("LiPe", "127.0.0.1", "LiPeUser", "LiPePWD320")
-    opccon = lpo.opccon(lp.loadopcconfig(), lp.loadnodes())
+    opccon = lpo.opccon()
     configjs = lp.loadserverconfig()
     app.run(configjs['IP'], configjs['Port'])
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
