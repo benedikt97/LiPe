@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-import json
 import mariadb
 import time
-import LiPe as lp
+
 
 class dbcon:
     def __init__(self, dbname, dbadress, dbuser, password):
-        self.i = 0
         self.db = mariadb.connect(
             user = dbuser,
             password = password,
