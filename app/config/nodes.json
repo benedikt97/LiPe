@@ -1,19 +1,18 @@
 {
     "cyclic": {
-        "WS_Tot_Bottles": "ns=3;s=\"WS_Data_DB\".\"WS_Tot_Bottles\"",
-        "WS_Cur_Mach_Spd": "ns=3;s=\"WS_Data_DB\".\"WS_Cur_Mach_Spd\"",
-        "WS_Set_Mach_Spd": "ns=3;s=\"WS_Data_DB\".\"WS_Set_Mach_Spd\"",
-        "WS_Cur_Mode": "ns=3;s=\"WS_Data_DB\".\"WS_Cur_Mode\"",
-        "WS_Cur_Program": "ns=3;s=\"WS_Data_DB\".\"WS_Cur_Prog\"",
-        "WS_Cur_State": "ns=3;s=\"WS_Data_DB\".\"WS_Cur_State\"",
-        "KHS_Level_Bowl": "ns=3;s=\"WS_Data_DB\".\"KHS_Level_Bowl\"",
-        "KHS_Press_Bowl" : "ns=3;s=\"WS_Data_DB\".\"KHS_Press_Bowl\"",
-        "KHS_Press_Product": "ns=3;s=\"WS_Data_DB\".\"KHS_Press_Product\"",
-        "KHS_Press_ReturnGas": "ns=3;s=\"WS_Data_DB\".\"KHS_Press_ReturnGas\"",
-        "KHS_Press_Water": "ns=3;s=\"WS_Data_DB\".\"KHS_Press_Water\"",
-        "ActiveEnergyRate1": "ns=3;s=\"LibKHS_EnergyToHMI_DB\".\"MeasuringValues\".\"ActiveEnergyRate1\""},
+        "WS_Tot_Bottles": "ns=2;i=2",
+        "WS_Cur_Mach_Spd": "ns=2;i=3",
+        "WS_Set_Mach_Spd": "ns=2;i=4",
+        "WS_Cur_Mode": "ns=2;i=5",
+        "WS_Cur_Program": "ns=2;i=6",
+        "WS_Cur_State": "ns=2;i=7",
+        "KHS_Level_Bowl": "ns=2;i=8",
+        "KHS_Press_Bowl" : "ns=2;i=9",
+        "KHS_Press_Product": "ns=2;i=10",
+        "KHS_Press_ReturnGas": "ns=2;i=11",
+        "KHS_Press_Water": "ns=2;i=12"},
     "static": {
-        "WS_Mach_Design_Spd" : "ns=3;s=\"WS_Data_DB\".\"WS_Mach_Design_Spd\""
+        "WS_Mach_Design_Spd" : "ns=2;i=13"
     }
 }
 

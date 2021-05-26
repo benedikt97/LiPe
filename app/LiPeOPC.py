@@ -50,7 +50,8 @@ class opccoll(Thread):
                     self.dbconn.WriteActValues(self.sqlpre, self.actValues)      
                 time.sleep(self.configjs["Zyklus"])  
             except Exception as e:
-                self.dbconn.writecom("opc", "Error", "No Connection to OPC Server/Database possible", str(e))
+                print(" detected")
+                self.dbconn.writecom("opc", "Error", "No Connection to OPC Server/Database possible", "str(e)")
                 return
         return
 
