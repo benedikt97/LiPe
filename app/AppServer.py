@@ -18,6 +18,7 @@ def index():
 
 @app.route('/api', methods=['GET'])
 def api():
+    dbcon = lpd.dbcon("LiPe", "127.0.0.1", "LiPeUser", "LiPePWD320")
     c = request.args.get('c')
     p1 = request.args.get('p1')
     p2 = request.args.get('p2')
@@ -37,13 +38,16 @@ def api():
 # Server Command
         elif (c == "deleteserverlog"):
             dbcon.deleteLog()
+            dbcon.close()
             return "done"
 #DB Commands            
         elif (c == "getopclogs"):
             result = dbcon.getTables()
+            dbcon.close()
             return result
         elif (c == "getlogs"):
             result = dbcon.getLog()
+            dbcon.close()
             return result
         elif (c == "getopcconfig"):
             result = lp.loadopcconfig()
@@ -56,6 +60,7 @@ def api():
             return result
         elif (c == "gettablelastx"):
             result = dbcon.getLastXTableRows(p1, p2)
+            dbcon.close()
             return result
         elif (c == "getnodes"):
             result = lp.loadnodes()
@@ -80,7 +85,6 @@ def test():
 
 
 if __name__ == '__main__':
-    dbcon = lpd.dbcon("LiPe", "127.0.0.1", "LiPeUser", "LiPePWD320")
     opccon = lpo.opccon()
     configjs = lp.loadserverconfig()
     app.run(configjs['IP'], configjs['Port'])
