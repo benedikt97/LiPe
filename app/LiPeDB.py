@@ -19,8 +19,8 @@ class dbcon:
         sql = "INSERT INTO serverlog (Modul, State, Message, Exception) VALUES (%s, %s, %s, %s)"
         val = (modul, state, message, exception)
         cur.execute(sql, val)
-        self.db.commit()
         cur.close()
+        self.db.commit()
         return
 
     def prepareAndSelectLoggingTable(self, Tablename, nodesjs):
@@ -34,8 +34,9 @@ class dbcon:
         for id in nodesjs:
             sql = "ALTER TABLE " + Tablename + " ADD COLUMN " + id + " FLOAT NOT NULL DEFAULT 0"
             cur.execute(sql)
-        self.db.commit()
         cur.close()
+        self.db.commit()
+        
         #----------------------------------------------------------------------------------------
         sql = "INSERT INTO " + Tablename + " ("
         comma = False
@@ -57,19 +58,21 @@ class dbcon:
             else:
                 sql = sqlpre
                 comma = True 
-            sql = sql + str(value)                   
+            sql = sql + str(actValues[value])                   
         sql = sql + ")"
+        print(sql)
         cur.execute(sql)
-        self.db.commit()
         cur.close()
+        self.db.commit()
+        
 
     def getLog(self):
         cur = self.db.cursor(dictionary=True)
         sql = "SELECT * FROM serverlog"
         cur.execute(sql)
         rows = cur.fetchall()
-        self.db.commit()
         cur.close()
+        self.db.commit()
         nesteddict = {}
         x = 0
         for row in rows:
@@ -81,16 +84,16 @@ class dbcon:
         cur = self.db.cursor()
         sql = "DELETE FROM serverlog"
         cur.execute(sql)
-        self.db.commit()
         cur.close()
+        self.db.commit()
         return "Done"
 
     def deleteTable(self, name):
         cur = self.db.cursor()
         sql = "DELETE FROM " + name
         cur.execute(sql)
-        self.db.commit()
         cur.close()
+        self.db.commit()
         return "Done"
 
 
@@ -100,25 +103,25 @@ class dbcon:
         sql = "SHOW TABLES"
         cur.execute(sql)
         rows = cur.fetchall()
+        cur.close()
         nesteddict = {}
         i = 1
         for row in rows:
             nesteddict["Log "+ str(i)] = row["Tables_in_LiPe"]
             i += 1
-        self.db.commit()
-        cur.close()
+        self.db.commit()  
         return nesteddict
 
     def getTable(self, tablename):
-        cur = self.dbcurdict
+        cur = self.db.cursor(dictionary=True)
         sql = "SELECT * FROM " + tablename
         cur.execute(sql)
+        cur.close()
         rows = cur.fetchall()
         nesteddict = {}
         for row in rows:
             nesteddict[row["id"]] = row
         self.db.commit()
-        cur.close()
         return nesteddict
 
     def getLastXTableRows(self, tablename, x):
@@ -126,17 +129,20 @@ class dbcon:
         sql = "SELECT * FROM " + tablename + " ORDER BY id DESC LIMIT " + str(x)
         cur.execute(sql)
         rows = cur.fetchall()
+        cur.close()
         nesteddict = {}
         for row in rows:
             nesteddict[row["id"]] = row
         self.db.commit()
-        cur.close()
         return nesteddict
 
     def Test(self):
         result = "<h1>Dies ist ein Test</h1>"
         time.sleep(5)
         return(result)
+
+    def close(self):
+        self.db.close()
 
     
 
