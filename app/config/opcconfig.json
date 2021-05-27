@@ -1,1 +1,1 @@
-{"IP": "opc.tcp://127.0.0.1:4840", "Zyklus": 1, "DBLogging": false, "DBTablename": "Log3"}
+{"IP": "opc.tcp://127.0.0.1:4840", "Zyklus": 1, "DBLogging": true, "DBTablename": "DemoLog"}
