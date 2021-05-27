@@ -2,6 +2,7 @@ import sys
 sys.path.insert(0, "../app")
 import time
 import LiPe
+import random
 
 
 from opcua import ua, Server
@@ -47,10 +48,36 @@ if __name__ == "__main__":
     
     try:
         count = 0
+        cycle = 0
+        vlevelBowl = 70
+        vpressBowl = 4.5
+        vpressProduct = 5.2
+        vpressReturnGas = 2.3
+        vpressWater = 8.2
+        
         while True:
             time.sleep(1)
             count += 1
-            totBottles.set_value(count)
+            totBottles.set_value(count * 33)
+            vlevelBowl += (random.uniform(0, 1)-0.5)
+            vpressBowl += (random.uniform(0, 1)-0.5)
+            vpressProduct += (random.uniform(0, 1)-0.5)
+            vpressReturnGas += (random.uniform(0, 1)-0.5)
+            vpressWater += (random.uniform(0, 1)-0.5)
+
+            if count == 60:
+                count = 0
+                vlevelBowl = 70
+                vpressBowl = 4.5
+                vpressProduct = 5.2
+                vpressReturnGas = 2.3
+                vpressWater = 8.2
+
+            levelBowl.set_value(vlevelBowl)
+            pressBowl.set_value(vpressBowl)
+            pressProduct.set_value(vpressBowl)
+            pressReturnGas.set_value(vpressReturnGas)
+            pressWater.set_value(vpressWater)
     finally:
         #close connection, remove subcsriptions, etc
         server.stop()
