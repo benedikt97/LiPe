@@ -15,11 +15,12 @@ class dbcon:
         
 
     def writecom(self, modul, state, message, exception):
-        dbcursor = self.db.cursor()
+        cur = self.db.cursor()
         sql = "INSERT INTO serverlog (Modul, State, Message, Exception) VALUES (%s, %s, %s, %s)"
         val = (modul, state, message, exception)
-        dbcursor.execute(sql, val)
+        cur.execute(sql, val)
         self.db.commit()
+        cur.close()
         return
 
     def prepareAndSelectLoggingTable(self, Tablename, nodesjs):
@@ -34,6 +35,7 @@ class dbcon:
             sql = "ALTER TABLE " + Tablename + " ADD COLUMN " + id + " FLOAT NOT NULL DEFAULT 0"
             cur.execute(sql)
         self.db.commit()
+        cur.close()
         #----------------------------------------------------------------------------------------
         sql = "INSERT INTO " + Tablename + " ("
         comma = False
@@ -59,6 +61,7 @@ class dbcon:
         sql = sql + ")"
         cur.execute(sql)
         self.db.commit()
+        cur.close()
 
     def getLog(self):
         cur = self.db.cursor(dictionary=True)
@@ -66,6 +69,7 @@ class dbcon:
         cur.execute(sql)
         rows = cur.fetchall()
         self.db.commit()
+        cur.close()
         nesteddict = {}
         x = 0
         for row in rows:
@@ -78,6 +82,7 @@ class dbcon:
         sql = "DELETE FROM serverlog"
         cur.execute(sql)
         self.db.commit()
+        cur.close()
         return "Done"
 
     def deleteTable(self, name):
@@ -85,6 +90,7 @@ class dbcon:
         sql = "DELETE FROM " + name
         cur.execute(sql)
         self.db.commit()
+        cur.close()
         return "Done"
 
 
@@ -100,6 +106,7 @@ class dbcon:
             nesteddict["Log "+ str(i)] = row["Tables_in_LiPe"]
             i += 1
         self.db.commit()
+        cur.close()
         return nesteddict
 
     def getTable(self, tablename):
@@ -111,6 +118,7 @@ class dbcon:
         for row in rows:
             nesteddict[row["id"]] = row
         self.db.commit()
+        cur.close()
         return nesteddict
 
     def getLastXTableRows(self, tablename, x):
@@ -122,6 +130,7 @@ class dbcon:
         for row in rows:
             nesteddict[row["id"]] = row
         self.db.commit()
+        cur.close()
         return nesteddict
 
     def Test(self):
