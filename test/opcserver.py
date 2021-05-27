@@ -54,6 +54,8 @@ if __name__ == "__main__":
         vpressProduct = 5.2
         vpressReturnGas = 2.3
         vpressWater = 8.2
+        vsetMachSpeed = 120000
+        vcurMachSpeed = 120000
         
         while True:
             time.sleep(1)
@@ -65,19 +67,50 @@ if __name__ == "__main__":
             vpressReturnGas += (random.uniform(0, 1)-0.5)
             vpressWater += (random.uniform(0, 1)-0.5)
 
-            if count == 60:
+            if count == 30:
+                vsetMachSpeed = 60000
+
+            if count == 40:
+                vsetMachSpeed = 5000
+
+            if count == 50:
+                vsetMachSpeed = 120000
+
+            if count == 80:
+                vsetMachSpeed = 60000
+
+            if count == 90:
+                vsetMachSpeed = 120000
+            
+            if vsetMachSpeed != vcurMachSpeed:
+                diff =  vsetMachSpeed - vcurMachSpeed
+                vcurMachSpeed += (0.3*diff)
+
+            vcurMachSpeed = round(vcurMachSpeed)
+            vlevelBowl = round(vlevelBowl, 1)
+            vpressBowl = round(vpressBowl, 1)
+            vpressProduct = round(vpressProduct, 1)
+            vpressReturnGas = round(vpressReturnGas, 1)
+            vpressWater = round(vpressWater, 1)
+            
+
+            if count == 100:
                 count = 0
                 vlevelBowl = 70
                 vpressBowl = 4.5
                 vpressProduct = 5.2
                 vpressReturnGas = 2.3
                 vpressWater = 8.2
+                vsetMachSpeed = 120000
+                vcurMachSpeed = 120000
 
             levelBowl.set_value(vlevelBowl)
             pressBowl.set_value(vpressBowl)
-            pressProduct.set_value(vpressBowl)
+            pressProduct.set_value(vpressProduct)
             pressReturnGas.set_value(vpressReturnGas)
             pressWater.set_value(vpressWater)
+            setMachSpeed.set_value(vsetMachSpeed)
+            curMachSpeed.set_value(vcurMachSpeed)
     finally:
         #close connection, remove subcsriptions, etc
         server.stop()
